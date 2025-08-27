@@ -1,24 +1,21 @@
-import { test, expect } from "@playwright/test";
+import { test } from "../fixtures/zalando.fixture"
+import {expect} from "@playwright/test"
 
-test.describe("test suit 1", async () => {
-  test.beforeEach(async ({ page }) => {
-    await page.goto("https://en.zalando.de");
-  });
+test.describe("test suit 1", () => {
 
-  test("has tittle", async ({ page }) => {
-    await expect(page).toHaveTitle(
+  test("has title", async ({ zalando }) => {
+    await expect(zalando.page).toHaveTitle(
       "Shop Shoes, Fashion & Accessories Online | Zalando"
     );
   });
 
-  test("select category women", async ({ page }) => {
-    await page.locator('header a[href="/women-home/"]').click();
-    await expect(page).toHaveTitle("Women’s Shoes & Fashion Online | ZALANDO");
+  test("select category women", async ({ zalando }) => {
+    await zalando.selectWomenCategory()
+    await expect(zalando.page).toHaveTitle("Women’s Shoes & Fashion Online | ZALANDO");
   });
 
-  test("search item", async ({page}) => {
-    await page.locator('#header-search-input').fill('jeans');
-    await page.locator('#header-search-option-0').click()
-    await expect(page.getByRole('button', { name: 'Sort by' })).toBeVisible();
+  test("search item", async ({zalando}) => {
+    await zalando.searchItem('jeans');
+    await expect(zalando.sortByButton).toBeVisible();
   })
 });

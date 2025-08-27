@@ -22,9 +22,10 @@ async gotoHome () {
 
 async selectWomenCategory () {
     await this.womenCategoryLink.click()
+    await this.page.waitForTimeout(8000);
 }
 async searchItem (item: string) {
     await this.searchInput.fill(item);
-    await this.firstSearchOption.click()
-}
-}
+    await this.page.waitForTimeout(500); 
+    await this.firstSearchOption.click();
+}}
