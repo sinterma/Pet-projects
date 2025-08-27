@@ -19,6 +19,6 @@ test.describe("test suit 1", async () => {
   test("search item", async ({page}) => {
     await page.locator('#header-search-input').fill('jeans');
     await page.locator('#header-search-option-0').click()
-
+    await expect(page.getByRole('button', { name: 'Sort by' })).toBeVisible();
   })
 });
