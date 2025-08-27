@@ -15,4 +15,10 @@ test.describe("test suit 1", async () => {
     await page.locator('header a[href="/women-home/"]').click();
     await expect(page).toHaveTitle("Women’s Shoes & Fashion Online | ZALANDO");
   });
+
+  test("search item", async ({page}) => {
+    await page.locator('#header-search-input').fill('jeans');
+    await page.locator('#header-search-option-0').click()
+
+  })
 });
